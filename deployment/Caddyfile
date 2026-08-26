@@ -1,0 +1,10 @@
+# Caddy reverse proxy — the only thing exposed to the internet.
+# It automatically obtains and renews a free Let's Encrypt HTTPS
+# certificate for $DOMAIN (set in deployment/.env), redirects HTTP->HTTPS,
+# and forwards all traffic to the frontend nginx (which in turn proxies
+# /api and /socket.io to the backend). WebSockets are handled automatically.
+
+{$DOMAIN} {
+	encode gzip
+	reverse_proxy frontend:80
+}

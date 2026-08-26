@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+venv/
+env/
+.venv/
+.pytest_cache/
+
+# Node / frontend
+node_modules/
+Dashboard/dist/
+
+# Environment Variables (CRITICAL — never commit real secrets)
+.env
+.env.*
+!.env.example
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+users.db
+
+# Secrets & PKI (CRITICAL — regenerate with pki_setup.py, NEVER commit private keys)
+certs/
+certs_backup/
+*.key
+*.pem
+*.p12
+*.pfx
+
+# System snapshots (contain real machine security policy — keep local only)
+Snapshots/
+
+# Logs and Reports (runtime output — not source code)
+activity.log
+Reports/
+*.log
+
+# Tooling / worktrees / IDE
+.claude/
+.vscode/
+.idea/
+
+# Windows
+Thumbs.db
+desktop.ini
+__pycache__/
+Reports/
+Dashboard/node_modules/
+*.backup*

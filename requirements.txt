@@ -1,0 +1,36 @@
+# Core web framework
+flask
+flask-cors
+flask-jwt-extended
+flask-bcrypt
+flask-socketio
+
+# Rate limiting
+flask-limiter
+
+# API documentation
+flasgger
+
+# Async WSGI server
+eventlet
+gunicorn
+
+# Database & cache
+pymongo
+redis
+
+# Monitoring & scheduling
+psutil
+apscheduler
+
+# Environment management
+python-dotenv
+
+# Networking & security
+pyopenssl
+requests
+pywinrm
+
+# PDF report generation
+reportlab
+pillow

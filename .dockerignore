@@ -1,0 +1,21 @@
+# Git
+.git
+.gitignore
+
+# Dependencies
+node_modules
+venv
+__pycache__
+*.pyc
+
+# Environment & Secrets (CRITICAL)
+.env
+.env.*
+certs/
+
+# Build Context Optimization
+Dashboard/node_modules
+Dashboard/dist
+Reports/
+logs/
+activity.log

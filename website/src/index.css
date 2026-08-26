@@ -1,0 +1,340 @@
+@import "tailwindcss";
+
+/* ---------- Design tokens ---------- */
+:root[data-theme="dark"] {
+  --bg: #0a0a09;
+  --bg-soft: #121110;
+  --surface: #161514;
+  --surface-2: #201f1d;
+  --border: rgba(245, 240, 232, 0.09);
+  --border-strong: rgba(245, 240, 232, 0.2);
+  --text: #f5f3ee;
+  --text-muted: #a8a49c;
+  --text-dim: #6f6b64;
+  --accent: #f5f3ee;
+  --accent-strong: #ffffff;
+  --accent-2: #8a8781;
+  --accent-weak: rgba(255, 255, 255, 0.07);
+  --ok: #22c55e;
+  --ok-weak: rgba(34, 197, 94, 0.12);
+  --danger: #f87171;
+  --danger-weak: rgba(248, 113, 113, 0.12);
+  --warn: #facc15;
+  --warn-weak: rgba(250, 204, 21, 0.1);
+  --info: #60a5fa;
+  --info-weak: rgba(96, 165, 250, 0.12);
+  --shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  --btn-grad-a: #ffffff;
+  --btn-grad-b: #dedcd6;
+  --btn-fg: #0a0a09;
+  --glass: rgba(22, 21, 20, 0.6);
+}
+
+:root[data-theme="light"] {
+  --bg: #ffffff;
+  --bg-soft: #f6f5f2;
+  --surface: #ffffff;
+  --surface-2: #edece8;
+  --border: rgba(20, 18, 14, 0.1);
+  --border-strong: rgba(20, 18, 14, 0.2);
+  --text: #14120e;
+  --text-muted: #57534a;
+  --text-dim: #8f8a80;
+  --accent: #14120e;
+  --accent-strong: #000000;
+  --accent-2: #6f6b64;
+  --accent-weak: rgba(20, 18, 14, 0.06);
+  --ok: #16a34a;
+  --ok-weak: rgba(22, 163, 74, 0.1);
+  --danger: #dc2626;
+  --danger-weak: rgba(220, 38, 38, 0.09);
+  --warn: #ca8a04;
+  --warn-weak: rgba(202, 138, 4, 0.11);
+  --info: #2563eb;
+  --info-weak: rgba(37, 99, 235, 0.09);
+  --shadow: 0 20px 50px rgba(20, 18, 14, 0.09);
+  --btn-grad-a: #14120e;
+  --btn-grad-b: #2b2925;
+  --btn-fg: #ffffff;
+  --glass: rgba(255, 255, 255, 0.7);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection { background: var(--accent-weak); color: var(--accent-strong); }
+
+.mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+.display { font-family: "Fraunces", Georgia, serif; letter-spacing: -0.01em; }
+
+/* Anchored sections land clear of the floating nav (pill bottom ≈ 68px + air). */
+section[id] { scroll-margin-top: 92px; }
+
+/* Top scrim: fades page content behind the transparent floating nav so nothing
+   leaks harshly through the pill's edges as it scrolls under. Theme-aware. */
+.top-scrim {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  z-index: 40;
+  pointer-events: none;
+  background: linear-gradient(var(--bg) 30%, color-mix(in srgb, var(--bg) 55%, transparent) 65%, transparent);
+}
+
+/* ---------- Section eyebrow label ---------- */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-strong);
+}
+.eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 1.5px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  border-radius: 2px;
+}
+
+/* ---------- Atmosphere: aurora mesh + engineering grid + film grain ---------- */
+.aurora {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(52rem 30rem at 18% -8%, rgba(255,255,255,0.05), transparent 60%),
+    radial-gradient(44rem 26rem at 85% 0%, rgba(255,255,255,0.04), transparent 60%),
+    radial-gradient(36rem 24rem at 55% 30%, rgba(255,255,255,0.03), transparent 65%);
+}
+:root[data-theme="light"] .aurora {
+  background:
+    radial-gradient(52rem 30rem at 18% -8%, rgba(20,18,14,0.04), transparent 60%),
+    radial-gradient(44rem 26rem at 85% 0%, rgba(20,18,14,0.03), transparent 60%);
+}
+
+.grid-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(70rem 40rem at 50% 0%, black 30%, transparent 75%);
+}
+
+
+/* ---------- Surfaces ---------- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), var(--shadow);
+}
+
+/* Mouse-tracking spotlight (set --mx/--my from JS) */
+.spot { position: relative; overflow: hidden; }
+.spot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.06), transparent 65%);
+}
+.spot:hover::before { opacity: 1; }
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  background: var(--surface);
+}
+
+/* ---------- Buttons ---------- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--btn-fg);
+  background: linear-gradient(135deg, var(--btn-grad-a), var(--btn-grad-b));
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 30px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255, 255, 255, 0.25); }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text);
+  border: 1px solid var(--border-strong);
+  background: color-mix(in srgb, var(--surface) 55%, transparent);
+  backdrop-filter: blur(8px);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.btn-ghost:hover { border-color: var(--accent); background: var(--accent-weak); }
+
+/* ---------- Gradient headline ---------- */
+.gradient-text {
+  background: linear-gradient(100deg, var(--accent-strong) 0%, var(--accent-2) 55%, var(--accent-strong) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- Capability marquee ---------- */
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 36s linear infinite;
+}
+.marquee-track:hover { animation-play-state: paused; }
+
+/* ---------- Scroll reveal (fallback for non-motion sections) ---------- */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.in-view { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .marquee-track { animation: none; }
+}
+
+/* ---------- A11y focus ---------- */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ---------- Live pulse ---------- */
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.35); }
+  50% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+}
+.pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+
+/* ---------- Forms ---------- */
+.field {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-soft);
+  color: var(--text);
+  font-size: 14px;
+}
+.field::placeholder { color: var(--text-dim); }
+.field:focus { border-color: var(--accent); outline: none; }
+
+/* ---------- Application window: the product, shown honestly ---------- */
+.app-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: var(--bg-soft);
+  border-bottom: 1px solid var(--border);
+}
+.app-titlebar i {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--border-strong);
+  display: inline-block;
+}
+.app-body { padding: 16px; }
+
+/* ---------- MacBook at true proportions (screen 16:10, like the real device) ---------- */
+.mac { max-width: 900px; margin: 0 auto; }
+.mac-lid {
+  position: relative;
+  border: 1px solid var(--border-strong);
+  border-bottom: none;
+  border-radius: 20px 20px 0 0;
+  background: linear-gradient(var(--surface-2), var(--surface));
+  padding: 16px 12px 0;
+  box-shadow: var(--shadow);
+}
+.mac-cam {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--border-strong);
+}
+.mac-screen {
+  aspect-ratio: 16 / 10;
+  overflow-y: auto;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+}
+.mac-screen::-webkit-scrollbar { width: 8px; }
+.mac-screen::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
+.mac-base {
+  height: 15px;
+  margin: 0 -5%;
+  border: 1px solid var(--border-strong);
+  border-radius: 0 0 14px 14px;
+  background: linear-gradient(var(--surface-2), var(--surface));
+  position: relative;
+  box-shadow: 0 18px 30px rgba(0,0,0,0.35);
+}
+.mac-base::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 110px;
+  height: 5px;
+  border-radius: 0 0 8px 8px;
+  background: var(--border-strong);
+}

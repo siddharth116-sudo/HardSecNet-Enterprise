@@ -1,0 +1,19 @@
+﻿services:
+  mongo:
+    image: mongo:7
+    container_name: hardsecnet_mongo_dev
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - hardsecnet_mongo_dev_data:/data/db
+
+  redis:
+    image: redis:7-alpine
+    container_name: hardsecnet_redis_dev
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
+volumes:
+  hardsecnet_mongo_dev_data:

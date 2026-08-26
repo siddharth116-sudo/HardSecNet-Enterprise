@@ -1,0 +1,15 @@
+{
+  "id": "doc-0bec44c02877",
+  "imported_at": "2026-04-07T17:06:54.379214+00:00",
+  "name": "CIS Microsoft Windows 11 Stand-alone Benchmark",
+  "os_family": "windows",
+  "provenance": {
+    "filename": "CIS_Microsoft_Windows_11_Stand-alone_Benchmark_v4.0.0.pdf",
+    "page_count": 1364
+  },
+  "source_hash": "63ff1c4e171b95b8fc2bc09ca89ad627fdbfad1506c7ee9c265342c7d4aba7d4",
+  "source_path": "E:\\T\\hardsecnet\\hardsecnet-pyside\\runtime\\imports\\CIS_Microsoft_Windows_11_Stand-alone_Benchmark_v4.0.0.pdf",
+  "source_type": "pdf-text",
+  "status": "review_required",
+  "version": "v4.0.0"
+}
